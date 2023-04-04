@@ -26,12 +26,20 @@ class v2 : Vec {
 		
 		virtual int num_components ();
 		virtual float* as_array ();
-		virtual std::string to_string ();
+		virtual std::string to_string (); //Prints components to 4 decimal places
 		
+		float len ();
+
 		v2 operator+ (v2 const &b);
 		v2 operator+= (v2 const &b);
+		v2 operator- (v2 const &b);
+		v2 operator-= (v2 const &b);
 		float operator* (v2 const &b);
+		v2 operator* (float const &b);
+		v2 operator*= (float const &b);
+		v2 operator/ (float const &b);
+		v2 operator/= (float const &b);
 	
 };
 
-std::ostream& operator<< (std::ostream& stream, v2 v);
+std::ostream& operator<< (std::ostream& stream, v2 v); //Prints components to 4 decimal places

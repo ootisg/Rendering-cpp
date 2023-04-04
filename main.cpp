@@ -3,6 +3,6 @@
 
 int main () {
 	GlMathTest tests;
-	tests.run_v2_tests ();
+	tests.run_all_tests ();
 	return 0;
 }

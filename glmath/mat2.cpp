@@ -1,0 +1,61 @@
+#include "mat2.h"
+#include "v2.h"
+
+mat2::mat2 (float a1v, float a2v,
+      	    float b1v, float b2v) {
+	mat_data[0] = a1v;
+	mat_data[1] = a2v;
+	mat_data[2] = b1v;
+	mat_data[3] = b2v;
+}
+
+mat2::mat2 (mat2 const &from) {
+	memcpy (mat_data, from.mat_data, sizeof (float) * 4);
+}
+
+std::string mat2::to_string () {
+	char* buf = new char[33];
+	sprintf (buf,
+		 "[%.4f %.4f]\n"
+		 "[%.4f %.4f]\n",
+		 a1, a2,
+		 b1, b2);
+	return std::string (buf);
+}
+		
+float mat2::get (int x, int y) {
+	if (y * 2 + x > 4) {
+		return 0;
+	}
+	return mat_data[y * 2 + x];
+}
+
+void mat2::set (float val, int x, int y) {
+	if (y * 2 + x < 4) {
+		mat_data[y * 2 + x] = val;
+	}
+}
+
+mat2 mat2::operator+ (mat2 const &b) {
+	return mat2 (a1 + b.a1, a2 + b.a2,
+		     b1 + b.b1, b2 + b.b2);
+}
+
+mat2 mat2::operator* (mat2 const &b) {
+	mat2 result (a1 * b.a1 + a2 * b.b1, a1 * b.a2 + a2 * b.b2,
+		     b1 * b.a1 + b2 * b.b1, b1 * b.a2 + b2 * b.b2);
+	a1 = result.a1;
+	a2 = result.a2;
+	b1 = result.b1;
+	b2 = result.b2;
+	return *this;
+}
+
+v2 mat2::operator* (v2 const &b) {
+	return v2 (a1 * b.x + a2 * b.y, b1 * b.x + b2 * b.y);
+}
+
+std::ostream& operator<< (std::ostream& stream, mat2 m) {
+	stream << m.to_string ();
+	return stream;
+}
