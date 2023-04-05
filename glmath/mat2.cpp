@@ -18,32 +18,32 @@ std::string mat2::to_string () {
 	sprintf (buf,
 		 "[%.4f %.4f]\n"
 		 "[%.4f %.4f]\n",
-		 a1, a2,
-		 b1, b2);
+		 a1, b1,
+		 a2, b2);
 	return std::string (buf);
 }
 		
 float mat2::get (int x, int y) {
-	if (y * 2 + x > 4) {
+	if (x * 2 + y > 4) {
 		return 0;
 	}
-	return mat_data[y * 2 + x];
+	return mat_data[x * 2 + y];
 }
 
 void mat2::set (float val, int x, int y) {
-	if (y * 2 + x < 4) {
-		mat_data[y * 2 + x] = val;
+	if (x * 2 + y < 4) {
+		mat_data[x * 2 + y] = val;
 	}
 }
 
 mat2 mat2::operator+ (mat2 const &b) {
-	return mat2 (a1 + b.a1, a2 + b.a2,
-		     b1 + b.b1, b2 + b.b2);
+	return mat2 (a1 + b.a1, b1 + b.b1,
+		     a2 + b.a2, b2 + b.b2);
 }
 
 mat2 mat2::operator* (mat2 const &b) {
-	mat2 result (a1 * b.a1 + a2 * b.b1, a1 * b.a2 + a2 * b.b2,
-		     b1 * b.a1 + b2 * b.b1, b1 * b.a2 + b2 * b.b2);
+	mat2 result (a1 * b.a1 + b1 * b.a2, a2 * b.a1 + b2 * b.a2,
+		     a1 * b.b1 + b1 * b.b2, a2 * b.b1 + b2 * b.b2);
 	a1 = result.a1;
 	a2 = result.a2;
 	b1 = result.b1;
@@ -52,7 +52,7 @@ mat2 mat2::operator* (mat2 const &b) {
 }
 
 v2 mat2::operator* (v2 const &b) {
-	return v2 (a1 * b.x + a2 * b.y, b1 * b.x + b2 * b.y);
+	return v2 (a1 * b.x + b1 * b.y, a2 * b.x + b2 * b.y);
 }
 
 std::ostream& operator<< (std::ostream& stream, mat2 m) {

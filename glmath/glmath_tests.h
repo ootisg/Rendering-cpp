@@ -145,20 +145,20 @@ class GlMathTest {
 				tests_init ("Running mat2 addition tests");
 				mat2 a (1, 0,
 					0, 1);
-				mat2 b (0.2, 0.2,
+				mat2 b (0.2, 0.3,
 					0.2, 0.2);
 				mat2 c = a + b;
-				assert_equals (c, "[1.2000 0.2000]\n"
+				assert_equals (c, "[1.2000 0.3000]\n"
 						  "[0.2000 1.2000]\n");
 			}
 
 			//Test multiplication
 			if (1) {
 				tests_init ("Running mat2 multiplication tests");
-				mat2 a (0.1, 0.2,
-					0.3, 0.4);
-				mat2 b (0.5, 0.6,
-					0.7, 0.8);
+				mat2 a (0.1, 0.3,
+					0.2, 0.4);
+				mat2 b (0.5, 0.7,
+					0.6, 0.8);
 				a * b;
 				assert_equals (a, "[0.1900 0.2200]\n"
 						  "[0.4300 0.5000]\n");
