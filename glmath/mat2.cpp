@@ -1,16 +1,14 @@
 #include "mat2.h"
 #include "v2.h"
 
+#include <cmath>
+
 mat2::mat2 (float a1v, float a2v,
       	    float b1v, float b2v) {
 	mat_data[0] = a1v;
 	mat_data[1] = a2v;
 	mat_data[2] = b1v;
 	mat_data[3] = b2v;
-}
-
-mat2::mat2 (mat2 const &from) {
-	memcpy (mat_data, from.mat_data, sizeof (float) * 4);
 }
 
 std::string mat2::to_string () {
@@ -34,6 +32,16 @@ void mat2::set (float val, int x, int y) {
 	if (x * 2 + y < 4) {
 		mat_data[x * 2 + y] = val;
 	}
+}
+
+mat2 mat2::scale (v2 const &axes) {
+	return mat2(axes.x, 0,
+		    0, axes.y);
+}
+
+mat2 mat2::rotate (float theta) {
+	return mat2(cos(theta), sin(theta),
+		    -sin(theta), cos(theta));
 }
 
 mat2 mat2::operator+ (mat2 const &b) {

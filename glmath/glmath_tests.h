@@ -1,6 +1,8 @@
 #include "v2.h"
 #include "mat2.h"
 
+#include <cmath>
+
 class GlMathTest {
 	
 	int current_test = 1;
@@ -126,7 +128,7 @@ class GlMathTest {
 		
 			//if(1) used for scoping
 			
-			std::cout << "Running mat2 tests:" << std::endl;
+			std::cout << "Running tests for mat2:" << std::endl;
 
 			//Test constructors
 			if (1) {
@@ -164,6 +166,34 @@ class GlMathTest {
 						  "[0.4300 0.5000]\n");
 				v2 test_vec (0.5, 0.7);
 				assert_equals (a * test_vec, "[0.2490,0.5650]");
+			}
+
+			//Test scaling
+			if (1) {
+				tests_init ("Running mat2 scaling tests");
+				mat2 a;
+				v2 amts(0.5, 0.3);
+				a * mat2::scale(amts);
+				assert_equals (a, "[0.5000 0.0000]\n"
+						  "[0.0000 0.3000]\n");
+				v2 test(0.5, 0.5);
+				v2 res = a * test;
+				assert_equals (res, "[0.2500,0.1500]");
+			}
+
+			//Test rotation
+			if (1) {
+				tests_init ("Running mat2 rotation tests");
+				mat2 a;
+				v2 unit(1.0, 0.0);
+				a * mat2::rotate(M_PI/2);
+				//-0 because this is dumb
+				assert_equals (a * unit, "[-0.0000,1.0000]");
+				mat2 b;
+				b * mat2::rotate(M_PI);
+				assert_equals (b * unit, "[-1.0000,-0.0000]");
+				a * b;
+				assert_equals (a * unit, "[0.0000,-1.0000]");
 			}
 
 		}
